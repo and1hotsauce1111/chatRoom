@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/style/main.css" />
+    <title>My Chatroom</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://use.fontawesome.com/bdaf2e3960.js"></script>
+  </head>
+  <body>
+    <div class="online_count">
+      伺服器<span id="server_status" style="color:#3CB371"></span
+      >，目前線上人數：
+      <span id="cur_count" style="color:#CD5C5C"></span>&nbsp;人
+      <div class="show_edit_name">
+        <h3>您的名稱: <span id="selected_name"></span></h3>
+        <button id="reset_name">重新設定名稱</button>
+      </div>
+    </div>
+
+    <div class="chat_container">
+      <div class="header">
+        <div class="pre_page">
+          <i class="fa fa-arrow-left" aria-hidden="true"></i>
+        </div>
+        <div class="room_name">
+          <img src="/images/5657.jpg" alt />
+          <h5>Chat Room</h5>
+        </div>
+      </div>
+
+      <div class="chat_content_area">
+        <div class="chat_content_area_bobble_container"></div>
+        <!-- 別人的對話框 -->
+
+        <!-- <div class="chat_content_area_bobble">
+          <img src="/images/嚇到吃手手.jpg" alt />
+          <div class="chat_content_area_bobble_content">
+            <div class="chat_content_area_bobble_user_name">test1234</div>
+            <div class="chat_content_area_bobble_msg_area">
+              <div class="chat_content_area_bobble_msg_area_msg">
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                Consequuntur nulla ipsam vitae optio natus, nesciunt distinctio
+                cupiditate maxime vel, dignissimos saepe quaerat id, debitis ex?
+                Omnis nulla quod a veritatis ullam eveniet quis nihil culpa ab
+                dolorem ipsa sunt cum earum iste sequi porro, similique soluta
+                hic, doloremque ratione. Ullam?
+              </div>
+              <div class="chat_content_area_bobble_msg_area_time">
+                下午12:35
+              </div>
+            </div>
+          </div>
+        </div> -->
+
+        <!-- 自己的對話框 -->
+
+        <!-- <div class="chat_content_area_bobble_self">
+          <div class="chat_content_area_bobble_self_msg">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam
+            explicabo quos nobis dicta vel doloribus earum accusamus est ipsum
+            excepturi amet nemo, maiores magni iusto illo odio enim rem itaque
+            atque animi neque quas? Cupiditate explicabo consectetur alias
+            ratione repellat, error hic laudantium impedit. Explicabo rerum
+            itaque molestiae quam est!
+          </div>
+          <div class="chat_content_area_bobble_self_time">下午12:35</div>
+        </div> -->
+
+        <!-- 使用者列表 -->
+        <div class="user_list_container">
+          <!-- <div class="user_list">
+            <img src="/images/他還小直接打死吧.jpg" alt="" />
+            <div class="user_info">
+              <div class="user_name">test123</div>
+              <div class="user_last_msg">rrrrrrrr</div>
+            </div>
+          </div> -->
+        </div>
+      </div>
+
+      <!-- 文字輸入區域 -->
+      <div class="chat_input_area">
+        <div class="chat_input_area_tools"></div>
+        <div class="chat_input_area_textarea">
+          <textarea class="chat_message" id="input_msg"></textarea>
+        </div>
+      </div>
+
+      <!-- 彈出輸入姓名 -->
+      <div class="modal_name">
+        <div class="user_name">
+          <h3>請輸入名稱</h3>
+          <div class="user_name_input">
+            <input type="text" id="usr_name" />
+            <div class="save_btn">
+              <button id="save_name">確定</button>
+              <button id="cancel_name" style="display:none">取消</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="/useJs/main.js"></script>
+    <!-- <script src="/useJs/db_connector.js"></script> -->
+  </body>
+</html>
