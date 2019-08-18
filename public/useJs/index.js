@@ -10,6 +10,9 @@ document.addEventListener('DOMContentLoaded', evt => {
 
   // 點擊按鈕送出
   save_name_btn.addEventListener('click', evt => {
+    evt.stopPropagation();
+    evt.preventDefault();
+    console.log('click');
     if (userName.value.trim() === '') {
       userName.classList.add('alert');
       return;
@@ -18,9 +21,6 @@ document.addEventListener('DOMContentLoaded', evt => {
         userName.classList.remove('alert');
       }
       socket.emit('add_usr', { user: userName.value });
-      show_usrName.innerHTML = userName.value;
-      userName.value = ''; // 清空輸入框
-      modal_name.style.display = 'none';
     }
   });
   // 按下enter送出
@@ -34,9 +34,6 @@ document.addEventListener('DOMContentLoaded', evt => {
           userName.classList.remove('alert');
         }
         socket.emit('add_usr', { user: userName.value });
-        show_usrName.innerHTML = userName.value;
-        userName.value = ''; // 清空輸入框
-        modal_name.style.display = 'none';
       }
     }
   });
@@ -57,6 +54,7 @@ document.addEventListener('DOMContentLoaded', evt => {
   // === 監聽連線狀態 ===
   let is_connect = document.querySelector('#server_status'); // 顯示連線狀態
   let online_usrs = document.querySelector('#cur_count'); // 顯示線上人數
+  let name_repeat_alert = document.querySelector('.alert_name'); // 重複暱稱的提示
 
   // 連線
   socket.on('connect', () => {
@@ -69,6 +67,23 @@ document.addEventListener('DOMContentLoaded', evt => {
   // 統計線上人數
   socket.on('usr_num', num => {
     online_usrs.innerHTML = num;
+  });
+  // 檢查暱稱是否重複
+  socket.on('repeat_name', data => {
+    console.log(data);
+    name_repeat_alert.style.display = 'block';
+    // 3.5秒後移除DOM才能重複觸發css animation
+    window.setTimeout(() => {
+      name_repeat_alert.style.display = 'none';
+    }, 3500);
+  });
+  // 暱稱建立成功
+  socket.on('confirm_name', data => {
+    console.log(data);
+    // 隱藏輸入modal
+    show_usrName.innerHTML = userName.value;
+    userName.value = ''; // 清空輸入框
+    modal_name.style.display = 'none';
   });
 
   // === 主要邏輯區塊 ===
