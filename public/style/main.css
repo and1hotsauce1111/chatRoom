@@ -128,9 +128,9 @@ button#reset_name:hover {
 }
 
 /* 對話框 */
-.chat_content_area_bobble_container {
+/* .chat_content_area_bobble_container {
   display: none;
-}
+} */
 /* 別人的對話框 */
 
 .chat_container .chat_content_area_bobble .chat_content_area_bobble_content {
@@ -237,7 +237,7 @@ button#reset_name:hover {
 /* Modal樣式 */
 
 .modal_name {
-  display: none;
+  /* display: none; */
   position: fixed;
   top: 0;
   left: 0;
@@ -250,7 +250,7 @@ button#reset_name:hover {
   position: relative;
   top: 10vh;
   left: 45vw;
-  max-width: 350px;
+  max-width: 400px;
 }
 
 .modal_name .user_name .save_btn {
@@ -276,12 +276,12 @@ button#reset_name:hover {
   height: 150px;
   text-align: center;
   border-radius: 0px 0px 3px 3px;
+  padding: 0 10px;
 }
 
 .modal_name .user_name .user_name_input input {
   height: 30px;
   font-size: 16px;
-  margin-bottom: 10px;
   border: 1px solid #cbcbcb;
   width: 70%;
   text-align: center;
