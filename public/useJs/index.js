@@ -66,11 +66,16 @@ document.addEventListener('DOMContentLoaded', evt => {
   });
   // 統計線上人數
   socket.on('usr_num', num => {
+    // console.log(num);
     online_usrs.innerHTML = num;
+  });
+  // 顯示線上使用者名稱
+  socket.on('users_name', names => {
+    console.log(names);
   });
   // 檢查暱稱是否重複
   socket.on('repeat_name', data => {
-    console.log(data);
+    // console.log(data);
     name_repeat_alert.style.display = 'block';
     // 3.5秒後移除DOM才能重複觸發css animation
     window.setTimeout(() => {
@@ -79,7 +84,7 @@ document.addEventListener('DOMContentLoaded', evt => {
   });
   // 暱稱建立成功
   socket.on('confirm_name', data => {
-    console.log(data);
+    // console.log(data);
     // 隱藏輸入modal
     show_usrName.innerHTML = userName.value;
     userName.value = ''; // 清空輸入框

@@ -249,7 +249,7 @@ button#reset_name:hover {
 .modal_name .user_name {
   position: relative;
   top: 10vh;
-  left: 45vw;
+  left: 40vw;
   max-width: 400px;
 }
 
@@ -321,9 +321,9 @@ button#reset_name:hover {
   line-height: 60px;
   padding: 0 5px;
   border-radius: 3px;
-  left: 680px;
+  left: 45vw;
   position: relative;
-  top: -210px;
+  top: -22vh;
   opacity: 0;
   z-index: 99;
   animation: opacity 3s linear;

@@ -16,21 +16,23 @@ app.get('/', (req, res) => {
 
 // === 偵測連線發生 ===
 io.on('connection', socket => {
+  // socekt指向單一個連線者，io指向所有連線者
   // 連線發生時人數加1
   users_num += 1;
   // 打事件通知前端
-  socket.emit('usr_num', users_num);
+  io.emit('usr_num', users_num);
 
   // 監聽新曾使用者事件
   socket.on('add_usr', data => {
     if (allUsers.hasOwnProperty(data.user)) {
-      console.log('repeat!');
+      //console.log('repeat!');
       socket.emit('repeat_name', '您輸入的暱稱已存在！');
       return;
     }
     socket.emit('confirm_name', '暱稱建立成功！');
-    allUsers[data.user] = socket;
-    console.log(Object.keys(allUsers));
+    allUsers[data.user] = socket; // 存自己id的socket
+    io.emit('users_name', Object.keys(allUsers)); // 前端顯示所有在線者
+    //console.log(Object.keys(allUsers));
   });
 
   socket.on('chat_data', data => {
@@ -59,8 +61,17 @@ io.on('connection', socket => {
 
   // === 偵測離線發生 ===
   socket.on('disconnect', () => {
+    //console.log(socket.id);
+    // 移除離線者
+    for (let i in allUsers) {
+      //console.log(allUsers[i].id);
+      if (allUsers[i].id === socket.id) {
+        delete allUsers[i];
+      }
+    }
     users_num = users_num < 0 ? 0 : (users_num -= 1);
-    socket.emit('usr_num', users_num);
+    io.emit('usr_num', users_num);
+    io.emit('users_name', Object.keys(allUsers));
   });
 });
 
